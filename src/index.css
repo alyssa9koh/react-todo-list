@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.square {
+  width: 200px;
+  height: 200px;
+  background-color: gray; /* Add your desired background color */
+  color: white; /* font color */
+  border-radius: 10px; /* Adjust the radius to curve the edges */
+  font-size: 1.25vw;
+  margin: 0.25em;
+  padding: 0.5em;
+}
+
+.list-title {
+  font-size: 3vw;
+  padding: 0.5em;
+  background-color: lightsteelblue;
+}
