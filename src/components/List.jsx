@@ -5,7 +5,6 @@ import Task from './Task';
 import '../index.css';
 
 export default function List() {
-    // meow
     return (
         <>
             <div className="list-title">
