@@ -1,14 +1,8 @@
 // import { useState } from 'react';
 
-import '../index.css';
+import Task from './Task';
 
-function Task() {
-    return (
-        <div className="square">
-            Here is a task! motherfucker
-        </div>
-    );
-}
+import '../index.css';
 
 export default function List() {
     return (
