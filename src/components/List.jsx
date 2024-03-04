@@ -8,7 +8,10 @@ export default function List() {
     return (
         <>
             <div className="list-title">
-                Your fuckin TODO list bitch
+                <div>
+                    Your fuckin TODO list bitch
+                </div>
+                <button>Add a task bitch</button>
             </div>
             <Task />
             <Task />
