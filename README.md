@@ -19,3 +19,7 @@ Be able to delete a task so that it is no longer on the list
 * Add a description to tasks
 * Archive tasks
 * Add due dates for tasks
+
+## Progress tracker
+* Project start: 4 March 2024
+* Basic dashboard finished: 4 March 2024
