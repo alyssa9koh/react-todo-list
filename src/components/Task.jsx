@@ -11,11 +11,11 @@ export default function Task({ desc }) {
 
     return (
         <div className="square">
-            <div>
-                { desc }
-            </div>
             <div className="done-button" onClick={handleDoneClick}>
                 {isDone ? 'X' : ''}
+            </div>
+            <div>
+                { desc }
             </div>
         </div>
     );
