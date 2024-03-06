@@ -1,10 +1,10 @@
 
 import '../index.css';
 
-export default function Task() {
+export default function Task({ desc }) {
     return (
         <div className="square">
-            Here is a task! motherfucker
+            { desc }
         </div>
     );
 }
