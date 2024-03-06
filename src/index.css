@@ -28,3 +28,9 @@ code {
   padding: 0.5em;
   background-color: lightsteelblue;
 }
+
+.task-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
