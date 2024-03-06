@@ -49,7 +49,6 @@ export default function List() {
                     <input type="text" value={inputValue} onChange={handleChange}/>
                     <input type="submit"/>
                 </form>
-                {/* <button onClick={handleAdd} >Add a task bitch</button> */}
             </div>
             {/* <Task desc={template_desc} />
             <Task /> */}
