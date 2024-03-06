@@ -13,14 +13,17 @@ code {
 }
 
 .square {
-  width: 200px;
-  height: 200px;
+  width: 15em;
+  height: 15em;
   background-color: gray; /* Add your desired background color */
   color: white; /* font color */
   border-radius: 10px; /* Adjust the radius to curve the edges */
   font-size: 1.25vw;
   margin: 0.25em;
   padding: 0.5em;
+  display: flex;
+  flex-direction: column; /* Align children at the start and end of the container */
+  /* justify-content: space-between; */
 }
 
 .list-title {
@@ -33,4 +36,15 @@ code {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+}
+
+.done-button{
+  border-radius: 10px;
+  background-color: white;
+  color: darkslategray;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
