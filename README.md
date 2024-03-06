@@ -23,3 +23,4 @@ Be able to delete a task so that it is no longer on the list
 ## Progress tracker
 * Project start: 4 March 2024
 * Basic dashboard finished: 4 March 2024
+* Add task with user-inputted description: 5 March 2024
