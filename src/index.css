@@ -23,7 +23,8 @@ code {
   padding: 0.5em;
   display: flex;
   flex-direction: column; /* Align children at the start and end of the container */
-  /* justify-content: space-between; */
+  justify-content: space-between;
+  align-items: flex-start
 }
 
 .list-title {
@@ -47,4 +48,19 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.delete-button{
+  background-color: darkgray;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.delete-button:hover{
+  background-color: #8E8E8E;
+}
+
+.desc{
+  flex-grow: 1;
 }

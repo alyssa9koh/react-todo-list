@@ -33,9 +33,15 @@ export default function List() {
         event.preventDefault();
     }
 
+    function handleDelete(index) {
+        const newTaskInfo = taskInfo.slice();
+        newTaskInfo.splice(index, 1);
+        setTaskInfo(newTaskInfo);
+    }
+
     const tasks = taskInfo.map((cur_desc, index) => {
         return (
-            <Task key={index} desc={cur_desc}/>
+            <Task key={index} desc={cur_desc} onDelete={()=>handleDelete(index)}/>
         )
     });
 
@@ -50,8 +56,6 @@ export default function List() {
                     <input type="submit"/>
                 </form>
             </div>
-            {/* <Task desc={template_desc} />
-            <Task /> */}
             <ol className="task-list">
                 {tasks}
             </ol>
