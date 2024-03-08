@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import '../index.css';
 
@@ -8,12 +8,29 @@ export default function Task({ initDesc, onDelete }) {
     const [editInputValue, setEditInputValue] = useState('');
     const [editMode, setEditMode] = useState(false);
 
+    /*
+    Setting up event listeners. This will allow the user to cancel edit mode
+    just by clicking outside of the task.
+    */
+    const editRef = useRef(null);
+    function handleCancelEdit(event) {
+        if (editRef.current && !editRef.current.contains(event.target)) {
+            setEditMode(false);
+        }
+    }
+    useEffect(() => {
+        document.addEventListener("mousedown", handleCancelEdit);
+        return () => {
+          document.removeEventListener("mousedown", handleCancelEdit);
+        };
+    });
+
     function handleDone() {
         setIsDone(!isDone);
     }
 
     function handleEdit() {
-        setEditMode(true);
+        setEditMode(!editMode);
     }
 
     function handleDelete() {
@@ -22,7 +39,7 @@ export default function Task({ initDesc, onDelete }) {
 
     function handleEditSubmit(event) {
         if (editInputValue === '') {
-            setEditInputValue('');
+            setEditMode(false);
             event.preventDefault();
             return;
         }
@@ -37,14 +54,14 @@ export default function Task({ initDesc, onDelete }) {
     }
 
     return (
-        <div className="square">
+        <div className="square" ref={editRef}>
             <div className="done-button" onClick={handleDone}>
                 {isDone ? 'X' : ''}
             </div>
-            <div className="desc">
+            <div className={`desc ${editMode ? 'hidden' : ''}`}>
                 { desc }
             </div>
-            <form onSubmit={handleEditSubmit} className={`${!editMode ? 'hidden' : ''}`}>
+            <form onSubmit={handleEditSubmit} className={`edit-form ${!editMode ? 'hidden' : ''}`}>
                 <input type="text" value={editInputValue} onChange={handleEditChange}/>
                 <input type="submit" value="Done!"/>
             </form>

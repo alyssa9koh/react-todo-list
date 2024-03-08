@@ -74,6 +74,10 @@ code {
   flex-grow: 1;
 }
 
+.edit-form {
+  flex-grow: 1;
+}
+
 .button-container{
   display: flex;
   flex-direction: row;
