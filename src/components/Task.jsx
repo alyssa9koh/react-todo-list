@@ -21,6 +21,11 @@ export default function Task({ initDesc, onDelete }) {
     }
 
     function handleEditSubmit(event) {
+        if (editInputValue === '') {
+            alert('Input field is empty! Please add a basic description for your task.');
+            event.preventDefault();
+            return;
+        }
         setDesc(editInputValue);
         setEditInputValue('');
         event.preventDefault();
