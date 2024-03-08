@@ -41,7 +41,7 @@ export default function List() {
 
     const tasks = taskInfo.map((cur_desc, index) => {
         return (
-            <Task key={index} desc={cur_desc} onDelete={()=>handleDelete(index)}/>
+            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
         )
     });
 
@@ -53,7 +53,7 @@ export default function List() {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <input type="text" value={inputValue} onChange={handleChange}/>
-                    <input type="submit"/>
+                    <input type="submit" value="Add task"/>
                 </form>
             </div>
             <ol className="task-list">

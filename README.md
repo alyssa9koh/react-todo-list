@@ -26,3 +26,6 @@ Be able to delete a task so that it is no longer on the list
 * Add task with user-inputted description: 5 March 2024
 * Added button to mark done: 6 March 2024
 * Added delete button that removes task from the list: 7 March 2024
+
+## References used
+* [Detecting a click outside of a React component using hooks](https://tekolio.com/how-to-detect-a-click-outside-of-a-react-component-using-hooks/)

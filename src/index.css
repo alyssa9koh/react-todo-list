@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.hidden {
+  display: none;
+}
+
 .square {
   width: 15em;
   height: 15em;
@@ -48,19 +52,33 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
-.delete-button{
+.task-button{
   background-color: darkgray;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  padding: 0.25em;
+  margin-right: 0.5em;
+  user-select: none;
 }
 
-.delete-button:hover{
+.task-button:hover{
   background-color: #8E8E8E;
 }
 
 .desc{
   flex-grow: 1;
+}
+
+.edit-form {
+  flex-grow: 1;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
 }
