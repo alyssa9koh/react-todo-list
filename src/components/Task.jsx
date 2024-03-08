@@ -5,6 +5,8 @@ import '../index.css';
 export default function Task({ initDesc, onDelete }) {
     const [isDone, setIsDone] = useState(false);
     const [desc, setDesc] = useState(initDesc);
+    const [editInputValue, setEditInputValue] = useState('');
+    // const [editMode, setEditMode] = useState(false);
 
     function handleDone() {
         setIsDone(!isDone);
@@ -18,6 +20,16 @@ export default function Task({ initDesc, onDelete }) {
        onDelete();
     }
 
+    function handleEditSubmit(event) {
+        setDesc(editInputValue);
+        setEditInputValue('');
+        event.preventDefault();
+    }
+
+    function handleEditChange(event) {
+        setEditInputValue(event.target.value);
+    }
+
     return (
         <div className="square">
             <div className="done-button" onClick={handleDone}>
@@ -26,6 +38,10 @@ export default function Task({ initDesc, onDelete }) {
             <div className="desc">
                 { desc }
             </div>
+            <form onSubmit={handleEditSubmit}>
+                <input type="text" value={editInputValue} onChange={handleEditChange}/>
+                <input type="submit" value="Done!"/>
+            </form>
             <div className="button-container">
                 <div className="task-button" onClick={handleEdit}>
                     edit
