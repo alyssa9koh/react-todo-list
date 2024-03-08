@@ -53,7 +53,7 @@ export default function List() {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <input type="text" value={inputValue} onChange={handleChange}/>
-                    <input type="submit"/>
+                    <input type="submit" value="Add task"/>
                 </form>
             </div>
             <ol className="task-list">

@@ -10,6 +10,10 @@ export default function Task({ initDesc, onDelete }) {
         setIsDone(!isDone);
     }
 
+    function handleEdit() {
+        console.log('poop');
+    }
+
     function handleDelete() {
        onDelete();
     }
@@ -23,7 +27,7 @@ export default function Task({ initDesc, onDelete }) {
                 { desc }
             </div>
             <div className="button-container">
-                <div className="task-button">
+                <div className="task-button" onClick={handleEdit}>
                     edit
                 </div>
                 <div className="task-button" onClick={handleDelete}>

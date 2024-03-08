@@ -48,6 +48,7 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .task-button{
@@ -58,6 +59,7 @@ code {
   border-radius: 10px;
   padding: 0.25em;
   margin-right: 0.5em;
+  user-select: none;
 }
 
 .task-button:hover{
