@@ -41,7 +41,7 @@ export default function List() {
 
     const tasks = taskInfo.map((cur_desc, index) => {
         return (
-            <Task key={index} desc={cur_desc} onDelete={()=>handleDelete(index)}/>
+            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
         )
     });
 

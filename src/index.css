@@ -50,17 +50,25 @@ code {
   align-items: center;
 }
 
-.delete-button{
+.task-button{
   background-color: darkgray;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  padding: 0.25em;
+  margin-right: 0.5em;
 }
 
-.delete-button:hover{
+.task-button:hover{
   background-color: #8E8E8E;
 }
 
 .desc{
   flex-grow: 1;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
 }

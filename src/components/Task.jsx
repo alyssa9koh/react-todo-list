@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import '../index.css';
 
-export default function Task({ desc, onDelete }) {
+export default function Task({ initDesc, onDelete }) {
     const [isDone, setIsDone] = useState(false);
+    const [desc, setDesc] = useState(initDesc);
 
     function handleDone() {
         setIsDone(!isDone);
@@ -21,8 +22,13 @@ export default function Task({ desc, onDelete }) {
             <div className="desc">
                 { desc }
             </div>
-            <div className="delete-button" onClick={handleDelete}>
-                delete
+            <div className="button-container">
+                <div className="task-button">
+                    edit
+                </div>
+                <div className="task-button" onClick={handleDelete}>
+                    delete
+                </div>
             </div>
         </div>
     );
