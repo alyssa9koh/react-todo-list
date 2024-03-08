@@ -16,7 +16,7 @@ Be able to click an already existing task and mark it as done.
 Be able to delete a task so that it is no longer on the list
 
 ## Additional features (ideas for now)
-* Add a description to tasks
+* Edit tasks
 * Archive tasks
 * Add due dates for tasks
 
