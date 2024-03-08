@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.hidden {
+  display: none;
+}
+
 .square {
   width: 15em;
   height: 15em;

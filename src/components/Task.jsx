@@ -6,14 +6,14 @@ export default function Task({ initDesc, onDelete }) {
     const [isDone, setIsDone] = useState(false);
     const [desc, setDesc] = useState(initDesc);
     const [editInputValue, setEditInputValue] = useState('');
-    // const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     function handleDone() {
         setIsDone(!isDone);
     }
 
     function handleEdit() {
-        console.log('poop');
+        setEditMode(true);
     }
 
     function handleDelete() {
@@ -22,12 +22,13 @@ export default function Task({ initDesc, onDelete }) {
 
     function handleEditSubmit(event) {
         if (editInputValue === '') {
-            alert('Input field is empty! Please add a basic description for your task.');
+            setEditInputValue('');
             event.preventDefault();
             return;
         }
         setDesc(editInputValue);
         setEditInputValue('');
+        setEditMode(false);
         event.preventDefault();
     }
 
@@ -43,7 +44,7 @@ export default function Task({ initDesc, onDelete }) {
             <div className="desc">
                 { desc }
             </div>
-            <form onSubmit={handleEditSubmit}>
+            <form onSubmit={handleEditSubmit} className={`${!editMode ? 'hidden' : ''}`}>
                 <input type="text" value={editInputValue} onChange={handleEditChange}/>
                 <input type="submit" value="Done!"/>
             </form>
