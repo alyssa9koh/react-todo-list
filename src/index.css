@@ -31,6 +31,21 @@ code {
   align-items: flex-start
 }
 
+.archive-square {
+  width: 15em;
+  height: 15em;
+  background-color: #61B061; /* Add your desired background color */
+  color: white; /* font color */
+  border-radius: 10px; /* Adjust the radius to curve the edges */
+  font-size: 1.25vw;
+  margin: 0.25em;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column; /* Align children at the start and end of the container */
+  justify-content: space-between;
+  align-items: flex-start
+}
+
 .list-title {
   font-size: 3vw;
   padding: 0.5em;
@@ -89,8 +104,23 @@ code {
   user-select: none;
 }
 
+.archive-task-button{
+  background-color: #68E868;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0.25em;
+  margin-right: 0.5em;
+  user-select: none;
+}
+
 .task-button:hover{
   background-color: #8E8E8E;
+}
+
+.archive-task-button:hover{
+  background-color: #5BD75B;
 }
 
 .desc{

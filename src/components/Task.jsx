@@ -58,7 +58,7 @@ export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
     }
 
     return (
-        <div className="square" ref={editRef}>
+        <div className={`${isArchived ? 'archive-square' : 'square'}`} ref={editRef}>
             <div className="done-button" onClick={handleDone}>
                 {isDone ? 'X' : ''}
             </div>
@@ -70,13 +70,13 @@ export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
                 <input type="submit" value="Done!"/>
             </form>
             <div className="button-container">
-                <div className="task-button" onClick={handleEdit}>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleEdit}>
                     edit
                 </div>
-                <div className="task-button" onClick={handleDelete}>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleDelete}>
                     delete
                 </div>
-                <div className='task-button' onClick={handleArchive}>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleArchive}>
                     {isArchived ? 'restore' : 'archive'}
                 </div>
             </div>

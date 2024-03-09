@@ -43,20 +43,60 @@ export default function List() {
     function handleDelete(index) {
         const newTaskInfo = taskInfo.slice();
         newTaskInfo.splice(index, 1);
-        console.log(newTaskInfo);
         setTaskInfo(newTaskInfo);
+    }
+
+    function handleArchiveDelete(index) {
+        const newArchiveInfo = archiveInfo.slice();
+        newArchiveInfo.splice(index, 1);
+        setArchiveInfo(newArchiveInfo);
     }
     
     function handleArchive(index) {
-        console.log('poop');
+        const newTaskInfo = taskInfo.slice();
+        const archivedDesc = newTaskInfo.splice(index, 1);
+        setTaskInfo(newTaskInfo);
+        const newArchiveInfo = [...archiveInfo, archivedDesc];
+        setArchiveInfo(newArchiveInfo);
+    }
+
+    function handleRestore(index) {
+        const newArchiveInfo = archiveInfo.slice();
+        const taskDesc = newArchiveInfo.splice(index, 1);
+        setArchiveInfo(newArchiveInfo);
+        const newTaskInfo = [...taskInfo, taskDesc];
+        setTaskInfo(newTaskInfo);
     }
 
     const tasks = taskInfo.map((cur_desc, index) => {
+        /*
+        Each element in a react ordered list must have a unique id.
+        For later: need to look at the specific mechanics behind this.
+        Previously in development, using 'index' as the key would lead in
+        tasks being rendered improperly after deletion / archiving--the
+        array taskInfo was updated properly, but tasks would be rendered as
+        if the last element in the array was the one being deleted / archived.
+        */ 
         const taskId = uuidv4();
         return (
             <Task key={taskId} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
+
+    const archive = archiveInfo.map((cur_desc, index) => {
+        /*
+        Each element in a react ordered list must have a unique id.
+        For later: need to look at the specific mechanics behind this.
+        Previously in development, using 'index' as the key would lead in
+        tasks being rendered improperly after deletion / archiving--the
+        array taskInfo was updated properly, but tasks would be rendered as
+        if the last element in the array was the one being deleted / archived.
+        */ 
+        const archiveId = uuidv4();
+        return (
+            <Task key={archiveId} initDesc={cur_desc} onDelete={()=>handleArchiveDelete(index)} onArchive={()=>handleRestore(index)} isArchived={true}/>
+        )
+    })
 
     function handleGoToArchive() {
         if (!showArchive) {
@@ -89,10 +129,9 @@ export default function List() {
                 </ol>
             </div>
             <div className={`${showArchive ? '' : 'hidden'}`}>
-                archive here
-                {/* <ol className={`task-list`}>
-                    {archived}
-                </ol> */}
+                <ol className={`task-list`}>
+                    {archive}
+                </ol>
             </div>
         </>
     );
