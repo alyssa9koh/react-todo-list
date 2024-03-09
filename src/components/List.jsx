@@ -7,8 +7,10 @@ import '../index.css';
 
 export default function List() {
     const [taskInfo, setTaskInfo] = useState([]);
+    const [timeInfo, setTimeInfo] = useState([]);
     const [archiveInfo, setArchiveInfo] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [inputTime, setInputTime] = useState('');
     const [showArchive, setShowArchive] = useState(false);
     const [archiveDashText, setArchiveDashText] = useState('Go to archive');
 
@@ -19,6 +21,10 @@ export default function List() {
     */
     function handleChange(event) {
         setInputValue(event.target.value);
+    }
+
+    function handleTimeChange(event) {
+        setInputTime(event.target.value);
     }
 
     /*
@@ -35,7 +41,9 @@ export default function List() {
             alert('Currently viewing archive. Your newly added task will be in the to-do list.');
         }
         const newTaskInfo = [...taskInfo, inputValue];
+        const newTimeInfo = [...timeInfo, inputTime];
         setTaskInfo(newTaskInfo);
+        setTimeInfo(newTimeInfo);
         setInputValue('');
         event.preventDefault();
     }
@@ -90,8 +98,9 @@ export default function List() {
         if the last element in the array was the one being deleted / archived.
         */ 
         const taskId = uuidv4();
+        const cur_time = timeInfo[index];
         return (
-            <Task key={taskId} index={index} desc={cur_desc} onEdit={handleEdit} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
+            <Task key={taskId} index={index} desc={cur_desc} time={cur_time} onEdit={handleEdit} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
 
@@ -128,6 +137,7 @@ export default function List() {
                 <div className="list-container">
                     <form onSubmit={handleSubmit}>
                         <input type="text" value={inputValue} onChange={handleChange}/>
+                        <input type="datetime-local" value={inputTime} onChange={handleTimeChange}/>
                         <input type="submit" value="Add task"/>
                     </form>
                     <div className="dash-button" onClick={handleGoToArchive}>

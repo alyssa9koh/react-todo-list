@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import '../index.css';
 
-export default function Task({ index, desc, onEdit, onDelete, onArchive, isArchived }) {
+export default function Task({ index, time, desc, onEdit, onDelete, onArchive, isArchived }) {
     const [isDone, setIsDone] = useState(false);
     const [editInputValue, setEditInputValue] = useState('');
     const [editMode, setEditMode] = useState(false);
