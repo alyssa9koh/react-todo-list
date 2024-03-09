@@ -2,9 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 
 import '../index.css';
 
-export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
+export default function Task({ index, desc, onEdit, onDelete, onArchive, isArchived }) {
     const [isDone, setIsDone] = useState(false);
-    const [desc, setDesc] = useState(initDesc);
     const [editInputValue, setEditInputValue] = useState('');
     const [editMode, setEditMode] = useState(false);
 
@@ -47,9 +46,7 @@ export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
             event.preventDefault();
             return;
         }
-        setDesc(editInputValue);
-        setEditInputValue('');
-        setEditMode(false);
+        onEdit(index, editInputValue);
         event.preventDefault();
     }
 
