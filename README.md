@@ -1,3 +1,14 @@
+#### Quick set-up guide
+Go to the directory you want to set this project up in. Then run:
+
+```
+git clone https://github.com/alyssa9koh/react-todo-list.git
+npm install
+npm start
+```
+
+You should be able to see the app at [http://localhost:3000/](http://localhost:3000/).
+
 # React To Do List
 
 Project idea from [this post](https://medium.com/@rohan.fulzele/50-beginner-and-intermediate-level-react-project-ideas-%EF%B8%8F-809b396faa39)
@@ -15,10 +26,10 @@ Be able to click an already existing task and mark it as done.
 ### Delete task
 Be able to delete a task so that it is no longer on the list
 
-## Additional features (ideas for now)
+## Additional features
 * Edit tasks (implemented)
 * Archive tasks (implemented)
-* Add due dates for tasks
+* Add due dates for tasks (not implemented)
 
 ## Progress tracker
 * Project start: 4 March 2024

@@ -123,7 +123,7 @@ export default function List() {
         <>
             <div className="list-title">
                 <div>
-                    Your fuckin TODO list bitch
+                    To Do List
                 </div>
                 <div className="list-container">
                     <form onSubmit={handleSubmit}>
