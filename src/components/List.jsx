@@ -7,9 +7,6 @@ import '../index.css';
 export default function List() {
     const [taskInfo, setTaskInfo] = useState([]);
     const [inputValue, setInputValue] = useState('');
-    const [showArchive, setShowArchive] = useState(false);
-    const [archiveDashText, setArchiveDashText] = useState('Go to archive');
-    const [archiveInfo, setArchiveInfo] = useState([]);
 
     /*
     "onChange" means whenever you change the thing in the
@@ -30,9 +27,6 @@ export default function List() {
             event.preventDefault();
             return;
         }
-        if (showArchive) {
-            alert('Currently viewing archive. Your newly added task will be in the to-do list.');
-        }
         const newTaskInfo = [...taskInfo, inputValue];
         setTaskInfo(newTaskInfo);
         setInputValue('');
@@ -40,33 +34,17 @@ export default function List() {
     }
 
     function handleDelete(index) {
+        console.log(index);
         const newTaskInfo = taskInfo.slice();
         newTaskInfo.splice(index, 1);
         setTaskInfo(newTaskInfo);
     }
 
-    function handleArchive(index) {
-        const newTaskInfo = taskInfo.slice();
-        const archivedDesc = newTaskInfo.splice(index, 1);
-        setTaskInfo(newTaskInfo);
-        const newArchiveInfo = [...archiveInfo, archivedDesc];
-        setArchiveInfo(newArchiveInfo);
-    }
-
     const tasks = taskInfo.map((cur_desc, index) => {
         return (
-            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
+            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
         )
     });
-
-    function handleGoToArchive() {
-        if (!showArchive) {
-            setArchiveDashText('Go back to to-do list');
-        } else {
-            setArchiveDashText('Go to archive');
-        }
-        setShowArchive(!showArchive);
-    }
 
     return (
         <>
@@ -74,27 +52,14 @@ export default function List() {
                 <div>
                     Your fuckin TODO list bitch
                 </div>
-                <div className="list-container">
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" value={inputValue} onChange={handleChange}/>
-                        <input type="submit" value="Add task"/>
-                    </form>
-                    <div className="dash-button" onClick={handleGoToArchive}>
-                        {archiveDashText}
-                    </div>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" value={inputValue} onChange={handleChange}/>
+                    <input type="submit" value="Add task"/>
+                </form>
             </div>
-            <div className={`${showArchive ? 'hidden' : ''}`}>
-                <ol className={`task-list`}>
-                    {tasks}
-                </ol>
-            </div>
-            <div className={`${showArchive ? '' : 'hidden'}`}>
-                archive here
-                {/* <ol className={`task-list`}>
-                    {archived}
-                </ol> */}
-            </div>
+            <ol className="task-list">
+                {tasks}
+            </ol>
         </>
     );
 }

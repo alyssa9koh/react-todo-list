@@ -34,7 +34,7 @@ export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
     }
 
     function handleDelete() {
-       onDelete();
+        onDelete();
     }
 
     function handleArchive() {
