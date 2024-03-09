@@ -7,6 +7,8 @@ import '../index.css';
 export default function List() {
     const [taskInfo, setTaskInfo] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [showArchive, setShowArchive] = useState(false);
+    const [archiveDashText, setArchiveDashText] = useState('Go to archive');
 
     /*
     "onChange" means whenever you change the thing in the
@@ -27,6 +29,9 @@ export default function List() {
             event.preventDefault();
             return;
         }
+        if (showArchive) {
+            alert('Currently viewing archive. Your newly added task will be in the to-do list.');
+        }
         const newTaskInfo = [...taskInfo, inputValue];
         setTaskInfo(newTaskInfo);
         setInputValue('');
@@ -45,20 +50,35 @@ export default function List() {
         )
     });
 
+    function handleGoToArchive() {
+        setShowArchive(!showArchive);
+        console.log(showArchive);
+    }
+
     return (
         <>
             <div className="list-title">
                 <div>
                     Your fuckin TODO list bitch
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" value={inputValue} onChange={handleChange}/>
-                    <input type="submit" value="Add task"/>
-                </form>
+                <div className="list-container">
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" value={inputValue} onChange={handleChange}/>
+                        <input type="submit" value="Add task"/>
+                    </form>
+                    <div className="dash-button" onClick={handleGoToArchive}>
+                        {archiveDashText}
+                    </div>
+                </div>
             </div>
-            <ol className="task-list">
-                {tasks}
-            </ol>
+            <div className={`${showArchive ? 'hidden' : ''}`}>
+                <ol className={`task-list`}>
+                    {tasks}
+                </ol>
+            </div>
+            <div className={`${showArchive ? '' : 'hidden'}`}>
+                archive here
+            </div>
         </>
     );
 }
