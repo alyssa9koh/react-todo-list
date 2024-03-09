@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
 import Task from './Task';
 
@@ -6,7 +7,10 @@ import '../index.css';
 
 export default function List() {
     const [taskInfo, setTaskInfo] = useState([]);
+    const [archiveInfo, setArchiveInfo] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [showArchive, setShowArchive] = useState(false);
+    const [archiveDashText, setArchiveDashText] = useState('Go to archive');
 
     /*
     "onChange" means whenever you change the thing in the
@@ -27,6 +31,9 @@ export default function List() {
             event.preventDefault();
             return;
         }
+        if (showArchive) {
+            alert('Currently viewing archive. Your newly added task will be in the to-do list.');
+        }
         const newTaskInfo = [...taskInfo, inputValue];
         setTaskInfo(newTaskInfo);
         setInputValue('');
@@ -39,11 +46,66 @@ export default function List() {
         setTaskInfo(newTaskInfo);
     }
 
+    function handleArchiveDelete(index) {
+        const newArchiveInfo = archiveInfo.slice();
+        newArchiveInfo.splice(index, 1);
+        setArchiveInfo(newArchiveInfo);
+    }
+    
+    function handleArchive(index) {
+        const newTaskInfo = taskInfo.slice();
+        const archivedDesc = newTaskInfo.splice(index, 1);
+        setTaskInfo(newTaskInfo);
+        const newArchiveInfo = [...archiveInfo, archivedDesc];
+        setArchiveInfo(newArchiveInfo);
+    }
+
+    function handleRestore(index) {
+        const newArchiveInfo = archiveInfo.slice();
+        const taskDesc = newArchiveInfo.splice(index, 1);
+        setArchiveInfo(newArchiveInfo);
+        const newTaskInfo = [...taskInfo, taskDesc];
+        setTaskInfo(newTaskInfo);
+    }
+
     const tasks = taskInfo.map((cur_desc, index) => {
+        /*
+        Each element in a react ordered list must have a unique id.
+        For later: need to look at the specific mechanics behind this.
+        Previously in development, using 'index' as the key would lead in
+        tasks being rendered improperly after deletion / archiving--the
+        array taskInfo was updated properly, but tasks would be rendered as
+        if the last element in the array was the one being deleted / archived.
+        */ 
+        const taskId = uuidv4();
         return (
-            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
+            <Task key={taskId} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
+
+    const archive = archiveInfo.map((cur_desc, index) => {
+        /*
+        Each element in a react ordered list must have a unique id.
+        For later: need to look at the specific mechanics behind this.
+        Previously in development, using 'index' as the key would lead in
+        tasks being rendered improperly after deletion / archiving--the
+        array taskInfo was updated properly, but tasks would be rendered as
+        if the last element in the array was the one being deleted / archived.
+        */ 
+        const archiveId = uuidv4();
+        return (
+            <Task key={archiveId} initDesc={cur_desc} onDelete={()=>handleArchiveDelete(index)} onArchive={()=>handleRestore(index)} isArchived={true}/>
+        )
+    })
+
+    function handleGoToArchive() {
+        if (!showArchive) {
+            setArchiveDashText('Go back to to-do list');
+        } else {
+            setArchiveDashText('Go to archive');
+        }
+        setShowArchive(!showArchive);
+    }
 
     return (
         <>
@@ -51,14 +113,26 @@ export default function List() {
                 <div>
                     Your fuckin TODO list bitch
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" value={inputValue} onChange={handleChange}/>
-                    <input type="submit" value="Add task"/>
-                </form>
+                <div className="list-container">
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" value={inputValue} onChange={handleChange}/>
+                        <input type="submit" value="Add task"/>
+                    </form>
+                    <div className="dash-button" onClick={handleGoToArchive}>
+                        {archiveDashText}
+                    </div>
+                </div>
             </div>
-            <ol className="task-list">
-                {tasks}
-            </ol>
+            <div className={`${showArchive ? 'hidden' : ''}`}>
+                <ol className={`task-list`}>
+                    {tasks}
+                </ol>
+            </div>
+            <div className={`${showArchive ? '' : 'hidden'}`}>
+                <ol className={`task-list`}>
+                    {archive}
+                </ol>
+            </div>
         </>
     );
 }

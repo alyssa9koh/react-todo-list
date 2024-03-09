@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import '../index.css';
 
-export default function Task({ initDesc, onDelete }) {
+export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
     const [isDone, setIsDone] = useState(false);
     const [desc, setDesc] = useState(initDesc);
     const [editInputValue, setEditInputValue] = useState('');
@@ -34,7 +34,11 @@ export default function Task({ initDesc, onDelete }) {
     }
 
     function handleDelete() {
-       onDelete();
+        onDelete();
+    }
+
+    function handleArchive() {
+        onArchive();
     }
 
     function handleEditSubmit(event) {
@@ -54,7 +58,7 @@ export default function Task({ initDesc, onDelete }) {
     }
 
     return (
-        <div className="square" ref={editRef}>
+        <div className={`${isArchived ? 'archive-square' : 'square'}`} ref={editRef}>
             <div className="done-button" onClick={handleDone}>
                 {isDone ? 'X' : ''}
             </div>
@@ -66,11 +70,14 @@ export default function Task({ initDesc, onDelete }) {
                 <input type="submit" value="Done!"/>
             </form>
             <div className="button-container">
-                <div className="task-button" onClick={handleEdit}>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleEdit}>
                     edit
                 </div>
-                <div className="task-button" onClick={handleDelete}>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleDelete}>
                     delete
+                </div>
+                <div className={`${isArchived ? 'archive-task-button' : 'task-button'}`} onClick={handleArchive}>
+                    {isArchived ? 'restore' : 'archive'}
                 </div>
             </div>
         </div>
