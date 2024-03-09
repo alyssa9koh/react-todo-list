@@ -9,6 +9,7 @@ export default function List() {
     const [inputValue, setInputValue] = useState('');
     const [showArchive, setShowArchive] = useState(false);
     const [archiveDashText, setArchiveDashText] = useState('Go to archive');
+    const [archiveInfo, setArchiveInfo] = useState([]);
 
     /*
     "onChange" means whenever you change the thing in the
@@ -44,9 +45,17 @@ export default function List() {
         setTaskInfo(newTaskInfo);
     }
 
+    function handleArchive(index) {
+        const newTaskInfo = taskInfo.slice();
+        const archivedDesc = newTaskInfo.splice(index, 1);
+        setTaskInfo(newTaskInfo);
+        const newArchiveInfo = [...archiveInfo, archivedDesc];
+        setArchiveInfo(newArchiveInfo);
+    }
+
     const tasks = taskInfo.map((cur_desc, index) => {
         return (
-            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
+            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
 

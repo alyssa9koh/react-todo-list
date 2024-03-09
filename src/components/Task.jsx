@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import '../index.css';
 
-export default function Task({ initDesc, onDelete }) {
+export default function Task({ initDesc, onDelete, onArchive, isArchived }) {
     const [isDone, setIsDone] = useState(false);
     const [desc, setDesc] = useState(initDesc);
     const [editInputValue, setEditInputValue] = useState('');
@@ -35,6 +35,10 @@ export default function Task({ initDesc, onDelete }) {
 
     function handleDelete() {
        onDelete();
+    }
+
+    function handleArchive() {
+        onArchive();
     }
 
     function handleEditSubmit(event) {
@@ -71,6 +75,9 @@ export default function Task({ initDesc, onDelete }) {
                 </div>
                 <div className="task-button" onClick={handleDelete}>
                     delete
+                </div>
+                <div className='task-button' onClick={handleArchive}>
+                    {isArchived ? 'restore' : 'archive'}
                 </div>
             </div>
         </div>
