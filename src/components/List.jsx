@@ -40,6 +40,18 @@ export default function List() {
         event.preventDefault();
     }
 
+    function handleEdit(index, newDesc) {
+        // Create a new array with the updated value at the specified index
+        const newTaskInfo = taskInfo.map((item, i) => (i === index ? newDesc : item));
+        setTaskInfo(newTaskInfo);
+    }
+
+    function handleArchiveEdit(index, newDesc) {
+        // Create a new array with the updated value at the specified index
+        const newArchiveInfo = archiveInfo.map((item, i) => (i === index ? newDesc : item));
+        setArchiveInfo(newArchiveInfo);
+    }
+
     function handleDelete(index) {
         const newTaskInfo = taskInfo.slice();
         newTaskInfo.splice(index, 1);
@@ -79,7 +91,7 @@ export default function List() {
         */ 
         const taskId = uuidv4();
         return (
-            <Task key={taskId} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
+            <Task key={taskId} index={index} desc={cur_desc} onEdit={handleEdit} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
 
@@ -94,7 +106,7 @@ export default function List() {
         */ 
         const archiveId = uuidv4();
         return (
-            <Task key={archiveId} initDesc={cur_desc} onDelete={()=>handleArchiveDelete(index)} onArchive={()=>handleRestore(index)} isArchived={true}/>
+            <Task key={archiveId} index={index} desc={cur_desc} onEdit={handleArchiveEdit} onDelete={()=>handleArchiveDelete(index)} onArchive={()=>handleRestore(index)} isArchived={true}/>
         )
     })
 
