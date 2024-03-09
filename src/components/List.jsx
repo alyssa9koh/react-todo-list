@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
 import Task from './Task';
 
@@ -34,15 +35,20 @@ export default function List() {
     }
 
     function handleDelete(index) {
-        console.log(index);
         const newTaskInfo = taskInfo.slice();
         newTaskInfo.splice(index, 1);
+        console.log(newTaskInfo);
         setTaskInfo(newTaskInfo);
+    }
+    
+    function handleArchive(index) {
+        console.log('poop');
     }
 
     const tasks = taskInfo.map((cur_desc, index) => {
+        const taskId = uuidv4();
         return (
-            <Task key={index} initDesc={cur_desc} onDelete={()=>handleDelete(index)}/>
+            <Task key={taskId} initDesc={cur_desc} onDelete={()=>handleDelete(index)} onArchive={()=>handleArchive(index)} isArchived={false}/>
         )
     });
 
