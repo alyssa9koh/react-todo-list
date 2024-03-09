@@ -51,8 +51,12 @@ export default function List() {
     });
 
     function handleGoToArchive() {
+        if (!showArchive) {
+            setArchiveDashText('Go back to to-do list');
+        } else {
+            setArchiveDashText('Go to archive');
+        }
         setShowArchive(!showArchive);
-        console.log(showArchive);
     }
 
     return (
@@ -78,6 +82,9 @@ export default function List() {
             </div>
             <div className={`${showArchive ? '' : 'hidden'}`}>
                 archive here
+                {/* <ol className={`task-list`}>
+                    {archived}
+                </ol> */}
             </div>
         </>
     );
