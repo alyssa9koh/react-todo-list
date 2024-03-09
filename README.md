@@ -17,7 +17,7 @@ Be able to delete a task so that it is no longer on the list
 
 ## Additional features (ideas for now)
 * Edit tasks (implemented)
-* Archive tasks
+* Archive tasks (implemented)
 * Add due dates for tasks
 
 ## Progress tracker
@@ -27,6 +27,7 @@ Be able to delete a task so that it is no longer on the list
 * Added button to mark done: 6 March 2024
 * Added delete button that removes task from the list: 7 March 2024
 * Added support for editing the description of a task: 8 March 2024
+* Added support for archiving and restoring tasks: 9 March 2024
 
 ## References used
 * [Detecting a click outside of a React component using hooks](https://tekolio.com/how-to-detect-a-click-outside-of-a-react-component-using-hooks/)
